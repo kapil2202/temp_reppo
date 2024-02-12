@@ -1,57 +1,53 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Aheadworks\CustGroupCatPermissions\Model\Service;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
+use Magento\Catalog\Model\ResourceModel\Category\Collection as CategoryCollection;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Catalog\Model\ResourceModel\Category\TreeFactory;
+use Aheadworks\CustGroupCatPermissions\Service\CategoryChildren;
 
 class CatalogCategoryManager
 {
-    /**
-     * Save all available of child categories id
-     *
-     * @var array
-     */
     private $allChildrenIds = [];
+    private $categoryChildren;
 
-    /**
-     * CatalogCategoryManager constructor.
-     *
-     * @param CategoryRepositoryInterface $categoryRepository
-     * @param TreeFactory $categoryTreeFactory
-     * @param StoreManagerInterface $storeManager
-     */
     public function __construct(
         private readonly CategoryRepositoryInterface $categoryRepository,
         private readonly TreeFactory $categoryTreeFactory,
-        private readonly StoreManagerInterface $storeManager
+        private readonly StoreManagerInterface $storeManager,
+        CategoryChildren $categoryChildren
     ) {
+        $this->categoryChildren = $categoryChildren;
     }
 
-    /**
-     * Get children ids from category collection
-     *
-     * @param AbstractCollection $collection
-     * @return array
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    public function getChildrenIds($collection): array
+    public function getChildrenIds(CategoryCollection $collection): array
     {
         $rootCategoryId = $this->storeManager->getStore()->getRootCategoryId();
         $categories = $collection->getConnection()->fetchall($collection->getSelect());
         $childrenIds = [];
         $recursionLevel = 0;
         $tree = $this->categoryTreeFactory->create();
-        $loadNode = $tree->loadNode($rootCategoryId)->loadChildren($recursionLevel);
         $childrenCategoryIds = [];
+
+        if (!$this->categoryChildren->getIds()) {
+            $loadNode = $tree->loadNode($rootCategoryId)->loadChildren($recursionLevel);
+            $this->allChildrenIds = $this->collectChildCategoryIds($loadNode, $childrenCategoryIds);
+            $this->categoryChildren->setIds($this->allChildrenIds);
+        }
+
+        $this->allChildrenIds = $this->categoryChildren->getIds();
+
         $parentIds = [];
-        $this->allChildrenIds = $this->collectChildCategoryIds($loadNode, $childrenCategoryIds);
+
         foreach ($categories as $category) {
             $parentIds[] = $category['entity_id'];
-            if (isset($this->allChildrenIds[$category['entity_id']])
+            if (
+                isset($this->allChildrenIds[$category['entity_id']])
                 && !empty($this->allChildrenIds[$category['entity_id']])
             ) {
                 $childCatResult = [];
@@ -63,13 +59,6 @@ class CatalogCategoryManager
         return array_diff($childrenIds, $parentIds);
     }
 
-    /**
-     * Processs Children Categories
-     *
-     * @param array $currentCatChildren
-     * @param array $childCatResult
-     * @return void
-     */
     private function processChildrenCategories(array $currentCatChildren, array &$childCatResult)
     {
         foreach ($currentCatChildren as $catId) {
