@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Aheadworks_CustGroupCatPermissions::home" title="Customer Group Catalog Permissions by Aheadworks" module="Aheadworks_CustGroupCatPermissions" sortOrder="100" parent="Magento_Catalog::catalog" resource="Aheadworks_CustGroupCatPermissions::home"/>
+        <add id="Aheadworks_CustGroupCatPermissions::bulk_update" title="Update Permissions in Bulk" translate="title" module="Aheadworks_CustGroupCatPermissions" sortOrder="10" parent="Aheadworks_CustGroupCatPermissions::home" action="aw_cat_permissions/bulk/update/" resource="Aheadworks_CustGroupCatPermissions::bulk_update"/>
+        <add id="Aheadworks_CustGroupCatPermissions::bulk_delete" title="Delete Permissions in Bulk" translate="title" module="Aheadworks_CustGroupCatPermissions" sortOrder="20" parent="Aheadworks_CustGroupCatPermissions::home" action="aw_cat_permissions/bulk/delete/" resource="Aheadworks_CustGroupCatPermissions::bulk_delete"/>
+    </menu>
+</config>

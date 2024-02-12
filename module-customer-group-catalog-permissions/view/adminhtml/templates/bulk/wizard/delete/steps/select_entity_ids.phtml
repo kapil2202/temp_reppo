@@ -1,0 +1,101 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Bulk\Wizard\Update\Steps\SelectEntityIds */
+?>
+
+<div class="aw-cgcp-wizard select-entity-ids">
+    <h2 class="steps-wizard-title">
+        <?= $block->escapeHtml(__('Step 2: Select Items')); ?>
+    </h2>
+    <div class="aw-cgcp-wizard select-entity-ids-container" data-bind="scope: 'aw_cgcp_select_entity_ids_container'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "aw_cgcp_select_entity_ids_container": {
+                        "component":"Magento_Ui/js/form/components/fieldset",
+                        "name":"aw_cgcp_select_entity_ids_container",
+                        "label":"",
+                        "children": {
+                            "<?= /* @noEscape */  $block->getData('config/selectCategoryIdsComponentName') ?>": {
+                                "component":"Aheadworks_CustGroupCatPermissions/js/bulk/wizard/element/categories",
+                                "template": "ui/form/field",
+                                "elementTmpl": "ui/grid/filters/elements/ui-select",
+                                "label": "<?= /* @noEscape */  __("Categories") ?>",
+                                "name":"<?= /* @noEscape */  $block->getData('config/selectCategoryIdsComponentName') ?>",
+                                "dataScope":"<?= /* @noEscape */  $block->getData('config/selectCategoryIdsComponentName') ?>",
+                                "filterOptions": true,
+                                "chipsEnabled": true,
+                                "disableLabel": true,
+                                "levelsVisibility": "1",
+                                "options": <?= /* @noEscape */  $block->serializeData($block->getCategoriesTree()) ?>,
+                                "listens": {
+                                    "index=create_category:responseData": "setParsed",
+                                    "newOption": "toggleOptionSelected"
+                                },
+                                "service":{
+                                    "template":"Aheadworks_CustGroupCatPermissions/bulk/wizard/element/categories/service"
+                                }
+                            },
+                            "<?= /* @noEscape */  $block->getData('config/productListingComponentName') ?>": {
+                                "name":"<?= /* @noEscape */  $block->getData('config/productListingComponentName') ?>",
+                                "dataScope":"<?= /* @noEscape */  $block->getData('config/productListingComponentName') ?>",
+                                "component":"Magento_Ui/js/form/components/insert-listing",
+                                "autoRender":true,
+                                "cssclass":"aw-cgcp-select-product-ids",
+                                "render_url": "<?= $block->escapeUrl($block->getUrl('mui/index/render')) ?>",
+                                "update_url":"<?= $block->escapeUrl($block->getUrl('mui/index/render')) ?>",
+                                "realTimeLink":true,
+                                "dataLinks":{
+                                    "imports":true,
+                                    "exports":false
+                                },
+                                "ns":"product_listing",
+                                "externalProvider":"${ $.ns }.product_listing_data_source",
+                                "stickyHeader":false,
+                                "exports":{
+                                    "stickyHeader":"${ $.ns }.${ $.ns }.listing_top:sticky"
+                                }
+                            },
+                            "<?= /* @noEscape */  $block->getData('config/cmsPageListingComponentName') ?>": {
+                                "name":"<?= /* @noEscape */  $block->getData('config/cmsPageListingComponentName') ?>",
+                                "dataScope":"<?= /* @noEscape */  $block->getData('config/cmsPageListingComponentName') ?>",
+                                "component":"Magento_Ui/js/form/components/insert-listing",
+                                "autoRender":true,
+                                "cssclass":"aw-cgcp-select-cms-page-ids",
+                                "render_url": "<?= $block->escapeUrl($block->getUrl('mui/index/render')) ?>",
+                                "update_url":"<?= $block->escapeUrl($block->getUrl('mui/index/render')) ?>",
+                                "realTimeLink":true,
+                                "dataLinks":{
+                                    "imports":true,
+                                    "exports":false
+                                },
+                                "ns":"cms_page_listing",
+                                "externalProvider":"${ $.ns }.cms_page_listing_data_source",
+                                "stickyHeader":false,
+                                "exports":{
+                                    "stickyHeader":"${ $.ns }.${ $.ns }.listing_top:sticky"
+                                }
+                            }
+                        }
+                    },
+                    "<?= /* @noEscape */  $block->getComponentName() ?>": {
+                        "component": "Aheadworks_CustGroupCatPermissions/js/bulk/wizard/delete/steps/select-entity-ids",
+                        "deletePermissionsUrl": "<?= /* @noEscape */ $block->getUrl($block->getData('config/deletePermissionsUrl')) ?>",
+                        "selectCategoryIdsComponentName": "aw_cgcp_select_entity_ids_container.<?= /* @noEscape */  $block->getData('config/selectCategoryIdsComponentName') ?>",
+                        "selectProductIdsComponentName": "product_listing.product_listing.product_columns.ids",
+                        "selectCmsPageIdsComponentName": "cms_page_listing.cms_page_listing.cms_page_columns.ids",
+                        "componentsSwitcherConfig": <?= /* @noEscape */  $block->serializeData($block->getData('config/componentsSwitcherConfig')) ?>,
+                        "appendTo": "<?= /* @noEscape */  $block->getParentComponentName() ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>

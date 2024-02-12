@@ -1,0 +1,88 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Bulk\Wizard\Update\Steps\SetPermissions */
+?>
+
+<div class="aw-cgcp-wizard set-permissions">
+    <h2 class="steps-wizard-title">
+        <?= $block->escapeHtml(__('Step 3: Set Permissions')); ?>
+    </h2>
+    <div class="aw-cgcp-wizard category-permissions-container" data-bind="scope: '<?= /* @noEscape */  $block->getData('config/categoryPermissionsContainerName') ?>'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <div class="aw-cgcp-wizard product-permissions-container" data-bind="scope: '<?= /* @noEscape */  $block->getData('config/productPermissionsContainerName') ?>'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <div class="aw-cgcp-wizard cms-page-permissions-container" data-bind="scope: '<?= /* @noEscape */  $block->getData('config/cmsPagePermissionsContainerName') ?>'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "<?= /* @noEscape */  $block->getData('config/categoryPermissionsContainerName') ?>": {
+                        "component":"Magento_Ui/js/form/components/insert-form",
+                        "name":"<?= /* @noEscape */  $block->getData('config/categoryPermissionsContainerName') ?>",
+                        "template":"Aheadworks_CustGroupCatPermissions/form/insert",
+                        "cssclass":"aw_cgcp_category_permissions",
+                        "label":"",
+                        "dataScope":"",
+                        "update_url":"<?= /* @noEscape */ $block->getUrl('mui/index/render') ?>",
+                        "render_url":"<?= /* @noEscape */ $block->getUrl('mui/index/render') ?>",
+                        "autoRender":true,
+                        "ns":"<?= /* @noEscape */ $block->getData('config/categoryPermissionsFormName') ?>",
+                        "externalProvider":"<?= /* @noEscape */ $block->getData('config/categoryPermissionsFormDataProviderName') ?>",
+                        "toolbarContainer":"${ $.parentName }",
+                        "formSubmitType":"ajax"
+                    },
+                    "<?= /* @noEscape */  $block->getData('config/productPermissionsContainerName') ?>": {
+                        "component":"Magento_Ui/js/form/components/insert-form",
+                        "name":"<?= /* @noEscape */  $block->getData('config/productPermissionsContainerName') ?>",
+                        "template":"Aheadworks_CustGroupCatPermissions/form/insert",
+                        "cssclass":"aw_cgcp_product_permissions",
+                        "label":"",
+                        "dataScope":"",
+                        "update_url":"<?= /* @noEscape */ $block->getUrl('mui/index/render') ?>",
+                        "render_url":"<?= /* @noEscape */ $block->getUrl('mui/index/render') ?>",
+                        "autoRender":true,
+                        "ns":"<?= /* @noEscape */ $block->getData('config/productPermissionsFormName') ?>",
+                        "externalProvider":"<?= /* @noEscape */ $block->getData('config/productPermissionsFormDataProviderName') ?>",
+                        "toolbarContainer":"${ $.parentName }",
+                        "formSubmitType":"ajax"
+                    },
+                    "<?= /* @noEscape */  $block->getData('config/cmsPagePermissionsContainerName') ?>": {
+                        "component":"Magento_Ui/js/form/components/insert-form",
+                        "name":"<?= /* @noEscape */  $block->getData('config/cmsPagePermissionsContainerName') ?>",
+                        "template":"Aheadworks_CustGroupCatPermissions/form/insert",
+                        "cssclass":"aw_cgcp_product_permissions",
+                        "label":"",
+                        "dataScope":"",
+                        "update_url":"<?= /* @noEscape */ $block->getUrl('mui/index/render') ?>",
+                        "render_url":"<?= /* @noEscape */ $block->getUrl('mui/index/render') ?>",
+                        "autoRender":true,
+                        "ns":"<?= /* @noEscape */ $block->getData('config/cmsPagePermissionsFormName') ?>",
+                        "externalProvider":"<?= /* @noEscape */ $block->getData('config/cmsPagePermissionsFormDataProviderName') ?>",
+                        "toolbarContainer":"${ $.parentName }",
+                        "formSubmitType":"ajax"
+                    },
+                    "<?= /* @noEscape */  $block->getComponentName() ?>": {
+                        "component": "Aheadworks_CustGroupCatPermissions/js/bulk/wizard/update/steps/set-permissions",
+                        "componentsSwitcherConfig": <?= /* @noEscape */  $block->serializeData($block->getData('config/componentsSwitcherConfig')) ?>,
+                        "applyPermissionsUrl": "<?= /* @noEscape */ $block->getUrl($block->getData('config/applyPermissionsUrl')) ?>",
+                        "categoryPermissionsForm": "<?= /* @noEscape */ $block->getData('config/categoryPermissionsFormName') ?>.<?= /* @noEscape */ $block->getData('config/categoryPermissionsFormName') ?>",
+                        "categoryPermissionsFormDataProvider": "<?= /* @noEscape */ $block->getData('config/categoryPermissionsFormDataProviderName') ?>",
+                        "productPermissionsForm": "<?= /* @noEscape */ $block->getData('config/productPermissionsFormName') ?>.<?= /* @noEscape */ $block->getData('config/productPermissionsFormName') ?>",
+                        "productPermissionsFormDataProvider": "<?= /* @noEscape */ $block->getData('config/productPermissionsFormDataProviderName') ?>",
+                        "cmsPagePermissionsForm": "<?= /* @noEscape */ $block->getData('config/cmsPagePermissionsFormName') ?>.<?= /* @noEscape */ $block->getData('config/cmsPagePermissionsFormName') ?>",
+                        "cmsPagePermissionsFormDataProvider": "<?= /* @noEscape */ $block->getData('config/cmsPagePermissionsFormDataProviderName') ?>",
+                        "appendTo": "<?= /* @noEscape */  $block->getParentComponentName() ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>

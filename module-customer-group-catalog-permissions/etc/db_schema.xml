@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="aw_cp_category_permissions" resource="default" engine="innodb"
+           comment="AW Customer Group Catalog Permissions Category Permissions Table">
+        <column xsi:type="int" name="permission_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Permission ID"/>
+        <column xsi:type="int" name="category_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Category ID"/>
+        <column xsi:type="smallint" name="record_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Record ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="int" name="customer_group_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer group ID"/>
+        <column xsi:type="smallint" name="view_mode" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="View mode value"/>
+        <column xsi:type="smallint" name="price_mode" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Price mode value"/>
+        <column xsi:type="smallint" name="checkout_mode" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Checkout mode value"/>
+        <column xsi:type="text" name="hidden_price_message" nullable="true" comment="Hidden price message"/>
+        <column xsi:type="text" name="hidden_add_to_cart_message" nullable="true" comment="Hidden add to cart message"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="permission_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_CP_CATEGORY_PERMISSIONS_STORE_ID_STORE_STORE_ID"
+                    table="aw_cp_category_permissions" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_CP_CTGR_PERMISSIONS_CTGR_ID_CAT_CTGR_ENTT_ENTT_ID"
+                    table="aw_cp_category_permissions" column="category_id" referenceTable="catalog_category_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_CP_CTGR_PERMISSIONS_CSTR_GROUP_ID_CSTR_GROUP_CSTR_GROUP_ID"
+                    table="aw_cp_category_permissions" column="customer_group_id" referenceTable="customer_group"
+                    referenceColumn="customer_group_id" onDelete="CASCADE"/>
+    </table>
+    <table name="aw_cp_product_permissions" resource="default" engine="innodb"
+           comment="AW Customer Group Catalog Permissions Product Permissions Table">
+        <column xsi:type="int" name="permission_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Permission ID"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Product ID"/>
+        <column xsi:type="smallint" name="record_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Record ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="int" name="customer_group_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer group ID"/>
+        <column xsi:type="smallint" name="view_mode" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="View mode value"/>
+        <column xsi:type="smallint" name="price_mode" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Price mode value"/>
+        <column xsi:type="smallint" name="checkout_mode" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Checkout mode value"/>
+        <column xsi:type="text" name="hidden_price_message" nullable="true" comment="Hidden price message"/>
+        <column xsi:type="text" name="hidden_add_to_cart_message" nullable="true" comment="Hidden add to cart message"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="permission_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_CP_PRODUCT_PERMISSIONS_STORE_ID_STORE_STORE_ID"
+                    table="aw_cp_product_permissions" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_CP_PRD_PERMISSIONS_PRD_ID_CAT_PRD_ENTT_ENTT_ID"
+                    table="aw_cp_product_permissions" column="product_id" referenceTable="catalog_product_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_CP_PRD_PERMISSIONS_CSTR_GROUP_ID_CSTR_GROUP_CSTR_GROUP_ID"
+                    table="aw_cp_product_permissions" column="customer_group_id" referenceTable="customer_group"
+                    referenceColumn="customer_group_id" onDelete="SET NULL"/>
+    </table>
+    <table name="aw_cp_cms_page_permissions" resource="default" engine="innodb"
+           comment="AW Customer Group Catalog Permissions Static Page Permissions Table">
+        <column xsi:type="int" name="permission_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Permission ID"/>
+        <column xsi:type="smallint" name="cms_page_id" padding="6" unsigned="false" nullable="false" identity="false"
+                comment="CMS page ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="int" name="customer_group_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer group ID"/>
+        <column xsi:type="smallint" name="view_mode" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="View mode value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="permission_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_CP_CMS_PAGE_PERMISSIONS_STORE_ID_STORE_STORE_ID"
+                    table="aw_cp_cms_page_permissions" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_CP_CMS_PAGE_PERMISSIONS_CMS_PAGE_ID_CMS_PAGE_PAGE_ID"
+                    table="aw_cp_cms_page_permissions" column="cms_page_id" referenceTable="cms_page"
+                    referenceColumn="page_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_447282175499595B8D1CB4E367B2A3C3"
+                    table="aw_cp_cms_page_permissions" column="customer_group_id" referenceTable="customer_group"
+                    referenceColumn="customer_group_id" onDelete="SET NULL"/>
+    </table>
+</schema>

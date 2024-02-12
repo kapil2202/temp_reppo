@@ -1,0 +1,45 @@
+<div class="admin__field" visible="visible" disable="disabled" css="element.setClasses(element)">
+    <div class="admin__field-control" data-role="grid-wrapper" attr="'data-index': index">
+        <div class="admin__control-table-wrapper">
+            <div data-role="spinner"
+                 class="admin__data-grid-loading-mask"
+                 if="$data.showSpinner">
+                <div class="spinner">
+                    <span repeat="8"></span>
+                </div>
+            </div>
+
+            <div class="admin__dynamic-rows admin__control-table" data-role="grid" attr="{'data-index': index}">
+                <ul>
+                    <li class="data-row" repeat="foreach: elems, item: '$record'">
+                        <!-- ko foreach: { data: $record().elems(), as: 'elem'}  -->
+                        <div if="elem.template"
+                            css="$parent.setClasses(elem)"
+                            visible="elem.visible"
+                            disable="elem.disabled"
+                            template="elem.template"></div>
+                        <!-- /ko -->
+                        <div if="$record().error"
+                             class="admin__field-error row-error"
+                             css="$data.additionalClasses">
+                            <span text="$record().error"></span>
+                        </div>
+                    </li>
+                </ul>
+                <div visible="element.addButton || (!!element.getRecordCount() && (element.pages() > 1))">
+                    <tr>
+                        <td attr="{'colspan': element.getColumnsCount()}"
+                            visible="element.addButton || pages() > 1">
+                            <button if="element.addButton"
+                                    attr="{disabled: disabled, 'data-action': 'add_new_row'}"
+                                    type="button"
+                                    click="processingAddChild.bind($data, false, false, false)">
+                                <span translate="addButtonLabel"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

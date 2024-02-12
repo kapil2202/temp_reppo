@@ -1,0 +1,56 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Bulk\Wizard\Update\Steps\SelectEntityType */
+?>
+
+<div class="aw-cgcp-wizard select-entity-type">
+    <h2 class="steps-wizard-title">
+        <?= $block->escapeHtml(__('Step 1: Select Catalog Element Type')); ?>
+    </h2>
+    <div class="aw-cgcp select-entity-type-container" data-bind="scope: 'aw_cgcp_select_entity_type_container'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "aw_cgcp_select_entity_type_data_provider": {
+                        "component": "Magento_Ui/js/form/provider",
+                        "name":"aw_cgcp_select_entity_type_data_provider",
+                        "data":{
+                            "entity_type_options": <?= /* @noEscape */  $block->serializeData($block->getEntityTypeOptionArray()) ?>
+                        }
+                    },
+                    "aw_cgcp_select_entity_type_container": {
+                        "component":"Magento_Ui/js/form/components/fieldset",
+                        "name":"aw_cgcp_select_entity_type_container",
+                        "label":"",
+                        "children": {
+                           "aw_cgcp_select_entity_type_checkbox": {
+                                "component":"Magento_Ui/js/form/element/checkbox-set",
+                                "name":"aw_cgcp_select_entity_type_checkbox",
+                                "source":"aw_cgcp_select_entity_type_data_provider",
+                                "deps": [
+                                    "aw_cgcp_select_entity_type_data_provider"
+                                ],
+                                "imports": {
+                                    "options": "${ $.source }:data.entity_type_options"
+                                }
+                           }
+                        }
+                    },
+                    "<?= /* @noEscape */  $block->getComponentName() ?>": {
+                        "component": "Aheadworks_CustGroupCatPermissions/js/bulk/wizard/update/steps/select-entity-type",
+                        "selectName": "aw_cgcp_select_entity_type_container.aw_cgcp_select_entity_type_checkbox",
+                        "predefinedEntityType": "<?= /* @noEscape */  $block->getPredefinedEntityType() ?>",
+                        "appendTo": "<?= /* @noEscape */  $block->getParentComponentName() ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>

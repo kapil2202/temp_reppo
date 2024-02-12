@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <!-- Category entrance points-->
+    <event name="catalog_category_collection_load_before">
+        <observer name="aheadworks_custgroupcatpermissions_category_collection_load_before" instance="Aheadworks\CustGroupCatPermissions\Observer\CategoryCollectionLoadBefore"/>
+    </event>
+    <event name="catalog_controller_category_init_after">
+        <observer name="aheadworks_custgroupcatpermissions_controller_category_init_after" instance="Aheadworks\CustGroupCatPermissions\Observer\ControllerCategoryInitAfter"/>
+    </event>
+    <event name="catalog_category_flat_loadnodes_before">
+        <observer name="aheadworks_custgroupcatpermissions_category_flat_loadnodes_before" instance="Aheadworks\CustGroupCatPermissions\Observer\CategoryFlatLoadNodesBefore"/>
+    </event>
+
+    <!-- Product entrance points-->
+    <event name="catalog_product_collection_load_after">
+        <observer name="aheadworks_custgroupcatpermissions_product_collection_load_after" instance="Aheadworks\CustGroupCatPermissions\Observer\ProductCollectionLoadAfter"/>
+    </event>
+    <event name="catalog_controller_product_init_after">
+        <observer name="aheadworks_custgroupcatpermissions_controller_product_init_after" instance="Aheadworks\CustGroupCatPermissions\Observer\ControllerProductInitAfter"/>
+    </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="aheadworks_custgroupcatpermissions_product_add_after" instance="Aheadworks\CustGroupCatPermissions\Observer\CheckoutProductAddAfter"/>
+    </event>
+    <event name="catalog_product_is_salable_before">
+        <observer name="aheadworks_custgroupcatpermissions_product_is_salable_before" instance="Aheadworks\CustGroupCatPermissions\Observer\ProductIsSalableBefore"/>
+    </event>
+
+    <!-- CMS page entrance points-->
+    <event name="cms_page_render">
+        <observer name="aheadworks_custgroupcatpermissions_cms_page_render" instance="Aheadworks\CustGroupCatPermissions\Observer\CmsPageRender"/>
+    </event>
+</config>

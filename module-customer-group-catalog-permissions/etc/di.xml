@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\Data\CategoryPermissionInterface" type="Aheadworks\CustGroupCatPermissions\Model\CategoryPermission" />
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\Data\ProductPermissionInterface" type="Aheadworks\CustGroupCatPermissions\Model\ProductPermission" />
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\Data\CmsPagePermissionInterface" type="Aheadworks\CustGroupCatPermissions\Model\CmsPagePermission" />
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\CategoryPermissionRepositoryInterface" type="Aheadworks\CustGroupCatPermissions\Model\CategoryPermissionRepository" />
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\ProductPermissionRepositoryInterface" type="Aheadworks\CustGroupCatPermissions\Model\ProductPermissionRepository" />
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\CmsPagePermissionRepositoryInterface" type="Aheadworks\CustGroupCatPermissions\Model\CmsPagePermissionRepository" />
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\Data\CategoryPermissionSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\Data\ProductPermissionSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\CustGroupCatPermissions\Api\Data\CmsPagePermissionSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Magento\Theme\Block\Html\Title" type="Aheadworks\CustGroupCatPermissions\Block\Theme\Html\Title" />
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Aheadworks\CustGroupCatPermissions\Api\Data\CategoryPermissionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CategoryPermission::MAIN_TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CategoryPermission::MAIN_TABLE_ID_FIELD_NAME</item>
+                </item>
+                <item name="Aheadworks\CustGroupCatPermissions\Api\Data\ProductPermissionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\ProductPermission::MAIN_TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\ProductPermission::MAIN_TABLE_ID_FIELD_NAME</item>
+                </item>
+                <item name="Aheadworks\CustGroupCatPermissions\Api\Data\CmsPagePermissionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CmsPagePermission::MAIN_TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CmsPagePermission::MAIN_TABLE_ID_FIELD_NAME</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\AdvancedSearch\Model\Adapter\DataMapper\AdditionalFieldsProvider">
+        <arguments>
+            <argument name="fieldsProviders" xsi:type="array">
+                <item name="ids" xsi:type="object">Aheadworks\CustGroupCatPermissions\Elasticsearch\BatchDataMapper\IdsFieldsProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Elasticsearch\Model\Adapter\FieldMapper\Product\FieldProvider\StaticField">
+        <plugin name="aheadworks_custgroupcatpermissions_elasticsearch_field_mapper" type="Aheadworks\CustGroupCatPermissions\Plugin\Elasticsearch\Model\Adapter\FieldMapper\Product\FieldProviderPlugin" />
+    </type>
+    <type name="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable">
+        <plugin name="aheadworks_custgroupcatpermissions_configurable_product_view_block" type="Aheadworks\CustGroupCatPermissions\Plugin\ConfigurableProduct\Block\Product\View\Type\ConfigurablePlugin" />
+    </type>
+    <type name="Magento\ConfigurableProduct\Model\Product\Type\Configurable">
+        <plugin name="aheadworks_custgroupcatpermissions_configurable_product_type_model" type="Aheadworks\CustGroupCatPermissions\Plugin\ConfigurableProduct\Model\Product\Type\ConfigurablePlugin" />
+    </type>
+    <type name="Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolver">
+        <plugin name="configurable" type="Magento\ConfigurableProduct\Plugin\Catalog\Model\Product\Pricing\Renderer\SalableResolver" disabled="true" />
+    </type>
+    <type name="Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolver">
+        <plugin name="aheadworks_custgroupcatpermissions_configurable_pricing_renderer" type="Aheadworks\CustGroupCatPermissions\Plugin\Catalog\Model\Product\Pricing\Renderer\SalableResolverPlugin" />
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="bulk_update_category_permissions_form_data_source" xsi:type="string">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CategoryPermission\Collection\SearchResult</item>
+                <item name="bulk_update_product_permissions_form_data_source" xsi:type="string">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\ProductPermission\Collection\SearchResult</item>
+                <item name="bulk_update_cms_page_permissions_form_data_source" xsi:type="string">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CmsPagePermission\Collection\SearchResult</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CategoryPermission\Collection\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CategoryPermission::MAIN_TABLE_NAME</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_cgcp_category_permission_collection</argument>
+            <argument name="eventObject" xsi:type="string">aw_cgcp_category_permission_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CategoryPermission</argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\CustGroupCatPermissions\Model\ResourceModel\ProductPermission\Collection\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\ProductPermission::MAIN_TABLE_NAME</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_cgcp_product_permission_collection</argument>
+            <argument name="eventObject" xsi:type="string">aw_cgcp_product_permission_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\ProductPermission</argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CmsPagePermission\Collection\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CmsPagePermission::MAIN_TABLE_NAME</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_cgcp_cms_page_permission_collection</argument>
+            <argument name="eventObject" xsi:type="string">aw_cgcp_cms_page_permission_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\CmsPagePermission</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Product\CompositeBaseSelectProcessor">
+        <arguments>
+            <argument name="baseSelectProcessors" xsi:type="array">
+                <item name="product_permissions" xsi:type="object">Aheadworks\CustGroupCatPermissions\Model\ResourceModel\Product\ProductPermissionsBaseSelectProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\App\PageCache\Identifier">
+        <plugin name="aheadworks_custgroupcatpermissions_pagecache_identifier" type="Aheadworks\CustGroupCatPermissions\Plugin\Framework\App\PageCache\IdentifierPlugin" />
+    </type>
+</config>

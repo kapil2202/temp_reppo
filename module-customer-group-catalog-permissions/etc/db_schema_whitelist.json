@@ -1,0 +1,57 @@
+{
+    "aw_cp_category_permissions": {
+        "column": {
+            "permission_id": true,
+            "category_id": true,
+            "record_id": true,
+            "store_id": true,
+            "customer_group_id": true,
+            "view_mode": true,
+            "price_mode": true,
+            "checkout_mode": true,
+            "hidden_price_message": true,
+            "hidden_add_to_cart_message": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_CP_CATEGORY_PERMISSIONS_STORE_ID_STORE_STORE_ID": true,
+            "AW_CP_CTGR_PERMISSIONS_CTGR_ID_CAT_CTGR_ENTT_ENTT_ID": true,
+            "AW_CP_CTGR_PERMISSIONS_CSTR_GROUP_ID_CSTR_GROUP_CSTR_GROUP_ID": true
+        }
+    },
+    "aw_cp_product_permissions": {
+        "column": {
+            "permission_id": true,
+            "product_id": true,
+            "record_id": true,
+            "store_id": true,
+            "customer_group_id": true,
+            "view_mode": true,
+            "price_mode": true,
+            "checkout_mode": true,
+            "hidden_price_message": true,
+            "hidden_add_to_cart_message": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_CP_PRODUCT_PERMISSIONS_STORE_ID_STORE_STORE_ID": true,
+            "AW_CP_PRD_PERMISSIONS_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true,
+            "AW_CP_PRD_PERMISSIONS_CSTR_GROUP_ID_CSTR_GROUP_CSTR_GROUP_ID": true
+        }
+    },
+    "aw_cp_cms_page_permissions": {
+        "column": {
+            "permission_id": true,
+            "cms_page_id": true,
+            "store_id": true,
+            "customer_group_id": true,
+            "view_mode": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_CP_CMS_PAGE_PERMISSIONS_STORE_ID_STORE_STORE_ID": true,
+            "AW_CP_CMS_PAGE_PERMISSIONS_CMS_PAGE_ID_CMS_PAGE_PAGE_ID": true,
+            "FK_447282175499595B8D1CB4E367B2A3C3": true
+        }
+    }
+}

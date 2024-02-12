@@ -1,0 +1,13 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var $block \Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Bulk\Wizard\Configuration */
+?>
+<?= /* @noEscape */ $block->renderBulkUpdateWizardSteps() ?>
+<script>
+    require(['uiRegistry', 'underscore'], function (registry, _) {
+        registry.async('<?= /* @noEscape */ $block->getData('config/stepWizardName') ?>')(function (component) {
+            _.delay(component.open.bind(component), 1500);
+        })
+    });
+</script>

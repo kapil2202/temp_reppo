@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">bulk_update_product_permissions_form.bulk_update_product_permissions_form_data_source</item>
+            <item name="deps" xsi:type="string">bulk_update_product_permissions_form.bulk_update_product_permissions_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Permissions</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">bulk_update_product_permissions_form</item>
+        </item>
+    </argument>
+    <dataSource name="bulk_update_product_permissions_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">bulk_update_product_permissions_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">permission_id</argument>
+            <argument name="requestFieldName" xsi:type="string">permission_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="aw_cat_permissions/bulk/applyUpdate"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="aw_cgcp_product_permissions_fieldset" component="Aheadworks_CustGroupCatPermissions/js/form/component/fieldset" sortOrder="100">
+        <settings>
+            <label/>
+        </settings>
+        <field name="permissions_changed">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <container name="aw_cgcp_visibility_manager" component="Aheadworks_CustGroupCatPermissions/js/form/visibility-manager">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </container>
+        <dynamicRows name="aw_cgcp_product_permissions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="componentType" xsi:type="string">dynamicRows</item>
+                    <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/bulk/wizard/update/component/dynamic-rows</item>
+                    <item name="template" xsi:type="string">Aheadworks_CustGroupCatPermissions/form/component/dynamic-rows</item>
+                    <item name="addButtonLabel" xsi:type="string" translate="true">New Permission</item>
+                    <item name="defaultRecord" xsi:type="boolean">true</item>
+                    <item name="pageSize" xsi:type="string">100</item>
+                    <item name="dndConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-wide aw-cgcp dynamic-rows product_permissions</item>
+                </item>
+            </argument>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/form/component/dynamic-rows/record</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                    </item>
+                </argument>
+                <field name="store_ids" class="Aheadworks\CustGroupCatPermissions\Ui\Component\Form\Store">
+                    <argument name="options" xsi:type="object">Aheadworks\CustGroupCatPermissions\Ui\Component\Form\Store\Options</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="label" xsi:type="string" translate="true">Store View</item>
+                            <item name="formElement" xsi:type="string">multiselect</item>
+                            <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/form/element/multiselect</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="elementTmpl" xsi:type="string">ui/form/element/multiselect</item>
+                            <item name="sortOrder" xsi:type="number">10</item>
+                            <item name="dataScope" xsi:type="string">store_ids</item>
+                            <item name="default" xsi:type="string">0</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="string">aw-cgcp-field-float</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="customer_group_ids">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Aheadworks\CustGroupCatPermissions\Ui\Component\Form\CustomerGroup\Options</item>
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="label" xsi:type="string" translate="true">Customer Group</item>
+                            <item name="formElement" xsi:type="string">multiselect</item>
+                            <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/form/element/multiselect</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="elementTmpl" xsi:type="string">ui/form/element/multiselect</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                            <item name="dataScope" xsi:type="string">customer_group_ids</item>
+                            <item name="default" xsi:type="string">32000</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="string">aw-cgcp-field-float</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="view_mode">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Aheadworks\CustGroupCatPermissions\Model\Source\AccessMode</item>
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="multiple" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string" translate="true">Product</item>
+                            <item name="formElement" xsi:type="string">checkboxset</item>
+                            <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/form/element/checkbox-set</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="elementTmpl" xsi:type="string">Aheadworks_CustGroupCatPermissions/form/element/checkbox-set</item>
+                            <item name="sortOrder" xsi:type="number">30</item>
+                            <item name="dataScope" xsi:type="string">view_mode</item>
+                            <item name="default" xsi:type="string">1</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="string">aw-cgcp-field-float</item>
+                            <item name="visibilityManagerName" xsi:type="string">${$.ns}.${$.ns}.aw_cgcp_product_permissions_fieldset.aw_cgcp_visibility_manager</item>
+                            <item name="switcherConfig" xsi:type="array">
+                                <item name="enabled" xsi:type="boolean">true</item>
+                                <item name="rules" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="value" xsi:type="string">1</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">${ $.parentName }.price_mode</item>
+                                                <item name="callback" xsi:type="string">enable</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="value" xsi:type="string">2</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">${ $.parentName }.price_mode</item>
+                                                <item name="callback" xsi:type="string">disableAndValueToHide</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="price_mode">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Aheadworks\CustGroupCatPermissions\Model\Source\AccessMode</item>
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="multiple" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string" translate="true">Product Price</item>
+                            <item name="formElement" xsi:type="string">checkboxset</item>
+                            <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/form/element/checkbox-set</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="elementTmpl" xsi:type="string">Aheadworks_CustGroupCatPermissions/form/element/checkbox-set</item>
+                            <item name="sortOrder" xsi:type="number">40</item>
+                            <item name="dataScope" xsi:type="string">price_mode</item>
+                            <item name="default" xsi:type="string">1</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="string">aw-cgcp-field-float</item>
+                            <item name="visibilityManagerName" xsi:type="string">${$.ns}.${$.ns}.aw_cgcp_product_permissions_fieldset.aw_cgcp_visibility_manager</item>
+                            <item name="switcherConfig" xsi:type="array">
+                                <item name="enabled" xsi:type="boolean">true</item>
+                                <item name="rules" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="value" xsi:type="string">1</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">${ $.parentName }.checkout_mode</item>
+                                                <item name="callback" xsi:type="string">enable</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="value" xsi:type="string">2</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="target" xsi:type="string">${ $.parentName }.checkout_mode</item>
+                                                <item name="callback" xsi:type="string">disableAndValueToHide</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="checkout_mode">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Aheadworks\CustGroupCatPermissions\Model\Source\AccessMode</item>
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">number</item>
+                            <item name="multiple" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string" translate="true">Add to Cart Button</item>
+                            <item name="formElement" xsi:type="string">checkboxset</item>
+                            <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/form/element/checkbox-set</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="elementTmpl" xsi:type="string">Aheadworks_CustGroupCatPermissions/form/element/checkbox-set</item>
+                            <item name="sortOrder" xsi:type="number">50</item>
+                            <item name="dataScope" xsi:type="string">checkout_mode</item>
+                            <item name="default" xsi:type="string">1</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="additionalClasses" xsi:type="string">aw-cgcp-field-float</item>
+                            <item name="visibilityManagerName" xsi:type="string">${$.ns}.${$.ns}.aw_cgcp_product_permissions_fieldset.aw_cgcp_visibility_manager</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="hidden_price_message">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string" translate="true">T‌ext Message When Price is Hidden</item>
+                            <item name="formElement" xsi:type="string">textarea</item>
+                            <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/form/element/textarea</item>
+                            <item name="elementTmpl" xsi:type="string">Aheadworks_CustGroupCatPermissions/form/element/textarea</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="sortOrder" xsi:type="number">70</item>
+                            <item name="dataScope" xsi:type="string">hidden_price_message</item>
+                            <item name="additionalClasses" xsi:type="string">aw-cgcp-field-new-row</item>
+                            <item name="tooltip" xsi:type="array">
+                                <item name="description" xsi:type="string" translate="true">This message is shown to visitors instead of hidden product price. HTML Tags are allowed.</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="isDisabled" xsi:type="string">!${ $.provider }:data.aw_cgcp_product_permissions.hidden_price_message</item>
+                            </item>
+                            <item name="service" xsi:type="array">
+                                <item name="template" xsi:type="string">Aheadworks_CustGroupCatPermissions/form/element/helper/service</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="hidden_add_to_cart_message">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string" translate="true">T‌ext Message When Button Add to Cart Is Hidden</item>
+                            <item name="formElement" xsi:type="string">textarea</item>
+                            <item name="component" xsi:type="string">Aheadworks_CustGroupCatPermissions/js/form/element/textarea</item>
+                            <item name="elementTmpl" xsi:type="string">Aheadworks_CustGroupCatPermissions/form/element/textarea</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="sortOrder" xsi:type="number">80</item>
+                            <item name="dataScope" xsi:type="string">hidden_add_to_cart_message</item>
+                            <item name="additionalClasses" xsi:type="string">aw-cgcp-field-new-row</item>
+                            <item name="tooltip" xsi:type="array">
+                                <item name="description" xsi:type="string" translate="true">This message is shown to visitors instead of hidden button Add to Cart. HTML Tags are allowed.</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="isDisabled" xsi:type="string">!${ $.provider }:data.aw_cgcp_product_permissions.hidden_add_to_cart_message</item>
+                            </item>
+                            <item name="service" xsi:type="array">
+                                <item name="template" xsi:type="string">Aheadworks_CustGroupCatPermissions/form/element/helper/service</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <actionDelete>
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">60</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="additionalClasses" xsi:type="string">action_delete_button</item>
+                        </item>
+                    </argument>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+    </fieldset>
+</form>

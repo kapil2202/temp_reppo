@@ -1,0 +1,11 @@
+<div class="admin__field-service">
+    <input type="checkbox"
+           class="admin__control-checkbox"
+           data-bind="event: {change: toggleAllCategories.bind($data)}"
+           attr="
+                id: $data.uid + '_default',
+                name: 'all_categories',
+                'data-form-part': $data.ns
+           ">
+    <label translate="'Choose all categories'" attr="for: $data.uid + '_default'" class="admin__field-label"></label>
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <aw_cat_permissions>
+            <general>
+                <enable>0</enable>
+            </general>
+            <catalog_permissions>
+                <browsing>hide_from_everyone</browsing>
+                <product_price_displaying>hide_from_everyone</product_price_displaying>
+                <product_add_to_cart_button_displaying>hide_from_everyone</product_add_to_cart_button_displaying>
+            </catalog_permissions>
+            <cms_page_permissions>
+                <cms_page_browsing>hide_from_everyone</cms_page_browsing>
+            </cms_page_permissions>
+        </aw_cat_permissions>
+    </default>
+</config>

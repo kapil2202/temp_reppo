@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Category entrance points-->
+    <type name="Magento\Catalog\Model\Layer\FilterList">
+        <plugin name="aheadworks_custgroupcatpermissions_hide_price" type="Aheadworks\CustGroupCatPermissions\Plugin\Catalog\Model\Layer\FilterListPlugin" />
+    </type>
+    <type name="Aheadworks\Layerednav\Model\Filter\CategoryValidator">
+        <plugin name="aheadworks_custgroupcatpermissions_category_filter_validator" type="Aheadworks\CustGroupCatPermissions\Plugin\Layerednav\Model\Filter\CategoryValidatorPlugin" />
+    </type>
+    <!-- Product entrance points-->
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
+        <plugin name="aheadworks_custgroupcatpermissions_add_permissions_to_product_collection" type="Aheadworks\CustGroupCatPermissions\Plugin\Catalog\Model\ResourceModel\Product\CollectionPlugin" />
+    </type>
+    <type name="Magento\GroupedProduct\Model\Product\Type\Grouped">
+        <plugin name="aheadworks_custgroupcatpermissions_process_permissions_of_grouped_product" type="Aheadworks\CustGroupCatPermissions\Plugin\GroupedProduct\Model\Product\Type\GroupedPlugin" />
+    </type>
+    <type name="Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable\Product\Collection">
+        <plugin name="aheadworks_custgroupcatpermissions_unset_data_before_save_to_cache" type="Aheadworks\CustGroupCatPermissions\Plugin\ConfigurableProduct\Model\ResourceModel\Product\CollectionPlugin" />
+    </type>
+    <type name="Magento\Framework\Pricing\Render">
+        <plugin name="aheadworks_custgroupcatpermissions_hide_product_price" type="Aheadworks\CustGroupCatPermissions\Plugin\Framework\Pricing\RenderPlugin" />
+    </type>
+    <type name="Magento\Quote\Model\Quote">
+        <plugin name="aheadworks_custgroupcatpermissions_skip_permissions_on_checkout" type="Aheadworks\CustGroupCatPermissions\Plugin\Quote\Model\QuotePlugin" />
+    </type>
+    <type name="Magento\Framework\View\Element\Template">
+        <plugin name="aheadworks_custgroupcatpermissions_add_customer_group" type="Aheadworks\CustGroupCatPermissions\Plugin\Framework\View\Element\TemplatePlugin" />
+    </type>
+    <type name="Magento\Wishlist\Controller\Index\Add">
+        <plugin name="aheadworks_custgroupcatpermissions_skip_permissions_on_add_wishlist" type="Aheadworks\CustGroupCatPermissions\Plugin\SkipPermissionsPlugin" />
+    </type>
+    <type name="Magento\Catalog\Controller\Product\Compare\Add">
+        <plugin name="aheadworks_custgroupcatpermissions_skip_permissions_on_add_compare" type="Aheadworks\CustGroupCatPermissions\Plugin\SkipPermissionsPlugin" />
+    </type>
+    <type name="Magento\LayeredNavigation\Block\Navigation">
+        <plugin name="aheadworks_custgroupcatpermissions_onecolumnplugin" type="Aheadworks\CustGroupCatPermissions\Plugin\OneColumnPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\View">
+        <plugin name="aw_custgroupcatpermissions_atc_button_on_product_view" type="Aheadworks\CustGroupCatPermissions\Plugin\Catalog\Block\Product\ViewPlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="aw_cgcp_product_model" type="Aheadworks\CustGroupCatPermissions\Plugin\Catalog\Model\FrontendProductPlugin" />
+    </type>
+</config>

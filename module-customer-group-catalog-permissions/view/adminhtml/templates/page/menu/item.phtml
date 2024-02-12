@@ -1,0 +1,16 @@
+<?php
+use Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Page\Menu\Item;
+use Magento\Framework\Escaper;
+
+/**
+ * Render item for admin menu
+ *
+ * @var $block Item
+ * @var $escaper Escaper
+ */
+?>
+<li>
+    <a <?= /* @noEscape */ $block->serializeLinkAttributes() ?>>
+        <?= $escaper->escapeHtml($block->getLabel()) ?>
+    </a>
+</li>

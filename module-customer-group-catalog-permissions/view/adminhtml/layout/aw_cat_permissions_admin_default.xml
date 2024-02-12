@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="page.main.actions">
+            <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Page\Menu" name="aw_cat_permissions_menu">
+                <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Page\Menu\Item" name="aw_cat_permissions_menu_item.bulk_update">
+                    <arguments>
+                        <argument name="path" xsi:type="string">*/bulk/update/</argument>
+                        <argument name="label" xsi:type="string" translate="true">Update Permissions in Bulk</argument>
+                        <argument name="resource" xsi:type="string">Aheadworks_CustGroupCatPermissions::bulk_update</argument>
+                        <argument name="controller" xsi:type="string">bulk</argument>
+                        <argument name="action" xsi:type="string">update</argument>
+                    </arguments>
+                </block>
+                <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Page\Menu\Item" name="aw_cat_permissions_menu_item.bulk_delete">
+                    <arguments>
+                        <argument name="path" xsi:type="string">*/bulk/delete/</argument>
+                        <argument name="label" xsi:type="string" translate="true">Delete Permissions in Bulk</argument>
+                        <argument name="resource" xsi:type="string">Aheadworks_CustGroupCatPermissions::bulk_delete</argument>
+                        <argument name="controller" xsi:type="string">bulk</argument>
+                        <argument name="action" xsi:type="string">delete</argument>
+                    </arguments>
+                </block>
+                <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Page\Menu\Item" name="aw_cat_permissions_menu_item.settings">
+                    <arguments>
+                        <argument name="path" xsi:type="string">adminhtml/system_config/edit/section/aw_cat_permissions</argument>
+                        <argument name="label" xsi:type="string" translate="true">Settings</argument>
+                        <argument name="resource" xsi:type="string">Aheadworks_CustGroupCatPermissions::config_aw_cat_permissions</argument>
+                    </arguments>
+                </block>
+                <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Page\Menu\Item" name="aw_cat_permissions_menu_item.readme">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Readme</argument>
+                        <argument name="link_attributes" xsi:type="array">
+                            <item name="href" xsi:type="string">https://aheadworks.com/resources/catalog-permissions/user-manual-catalog-permissions</item>
+                            <item name="target" xsi:type="string">_blank</item>
+                            <item name="class" xsi:type="string">separator</item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Page\Menu\Item" name="aw_cat_permissions_menu_item.support">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Get Support</argument>
+                        <argument name="link_attributes" xsi:type="array">
+                            <item name="href" xsi:type="string">https://aheadworks.com/contact</item>
+                            <item name="target" xsi:type="string">_blank</item>
+                        </argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

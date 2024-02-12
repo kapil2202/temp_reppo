@@ -1,0 +1,20 @@
+<?php
+/**
+ * Product view message template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php
+$product = $block->getProduct();
+$isHideAddToCart = (bool)$product->getData(\Aheadworks\CustGroupCatPermissions\Model\ProductPermission\Applier::HIDE_ADD_TO_CART);
+$hiddenAddToCartMessage = $product->getData(\Aheadworks\CustGroupCatPermissions\Api\Data\ProductPermissionInterface::HIDDEN_ADD_TO_CART_MESSAGE);
+?>
+
+<?php if ($isHideAddToCart && $hiddenAddToCartMessage): ?>
+<div>
+    <span>
+        <b><?= /* @noEscape */ __($hiddenAddToCartMessage) ?></b>
+    </span>
+</div>
+<?php endif;

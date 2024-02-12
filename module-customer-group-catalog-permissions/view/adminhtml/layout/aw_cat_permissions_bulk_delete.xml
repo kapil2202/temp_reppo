@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="aw_cat_permissions_admin_default"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Bulk\Wizard\Configuration"
+                   name="aw.cgcp.bulk.update.wizard.config">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="stepWizardName" xsi:type="string">aw-cgcp-bulk-delete-steps-wizard</item>
+                    </argument>
+                </arguments>
+                <block class="Magento\Ui\Block\Component\StepsWizard" name="aw-cgcp-bulk-delete-steps-wizard">
+                    <arguments>
+                        <argument name="config" xsi:type="array">
+                            <item name="dataScope" xsi:type="string">awCgcpBulkDeleteStepsWizard</item>
+                        </argument>
+                    </arguments>
+                    <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Bulk\Wizard\Delete\Steps\SelectEntityType" name="step1">
+                        <arguments>
+                            <argument name="config" xsi:type="array">
+                            </argument>
+                        </arguments>
+                    </block>
+                    <block class="Aheadworks\CustGroupCatPermissions\Block\Adminhtml\Bulk\Wizard\Delete\Steps\SelectEntityIds" name="step2">
+                        <arguments>
+                            <argument name="config" xsi:type="array">
+                                <item name="deletePermissionsUrl" xsi:type="string">aw_cat_permissions/bulk/applyDelete</item>
+                                <item name="selectCategoryIdsComponentName" xsi:type="string">aw_cgcp_select_category_ids</item>
+                                <item name="productListingComponentName" xsi:type="string">aw_cgcp_product_listing</item>
+                                <item name="cmsPageListingComponentName" xsi:type="string">aw_cgcp_cms_page_listing</item>
+                                <item name="componentsSwitcherConfig" xsi:type="array">
+                                    <item name="category" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_select_category_ids</item>
+                                            <item name="visible" xsi:type="boolean">true</item>
+                                        </item>
+                                        <item name="1" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_product_listing</item>
+                                            <item name="visible" xsi:type="boolean">false</item>
+                                        </item>
+                                        <item name="2" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_cms_page_listing</item>
+                                            <item name="visible" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                    <item name="product" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_select_category_ids</item>
+                                            <item name="visible" xsi:type="boolean">false</item>
+                                        </item>
+                                        <item name="1" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_product_listing</item>
+                                            <item name="visible" xsi:type="boolean">true</item>
+                                        </item>
+                                        <item name="2" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_cms_page_listing</item>
+                                            <item name="visible" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                    <item name="cms_page" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_select_category_ids</item>
+                                            <item name="visible" xsi:type="boolean">false</item>
+                                        </item>
+                                        <item name="1" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_product_listing</item>
+                                            <item name="visible" xsi:type="boolean">false</item>
+                                        </item>
+                                        <item name="2" xsi:type="array">
+                                            <item name="target" xsi:type="string">aw_cgcp_select_entity_ids_container.aw_cgcp_cms_page_listing</item>
+                                            <item name="visible" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

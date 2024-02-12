@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="aheadworks" translate="label" sortOrder="300">
+            <label>Aheadworks Extensions</label>
+        </tab>
+        <section id="aw_cat_permissions" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Customer Group Catalog Permissions</label>
+            <tab>aheadworks</tab>
+            <resource>Aheadworks_CustGroupCatPermissions::config_aw_cat_permissions</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General</label>
+                <field id="enable" translate="label,comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Aheadworks\CustGroupCatPermissions\Block\Adminhtml\System\Config\EnableModule</frontend_model>
+                    <comment>
+                        <![CDATA[<strong style="color:red">Warning!</strong> By default this feature hides all categories, products and Static pages.]]>
+                    </comment>
+                </field>
+            </group>
+            <group id="catalog_permissions" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Catalog Elements Permissions</label>
+                <field id="browsing" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Browsing Catalog Element</label>
+                    <source_model>Aheadworks\CustGroupCatPermissions\Model\Source\Config\AccessMode</source_model>
+                    <comment>
+                        "Catalog Element" can be either category or product.
+                    </comment>
+                </field>
+                <field id="browsing_customer_groups" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer groups</label>
+                    <validate>required-entry</validate>
+                    <source_model>Aheadworks\CustGroupCatPermissions\Model\Source\Customer\Groups</source_model>
+                    <depends>
+                        <field id="browsing">hide_from_specified_customer_groups</field>
+                    </depends>
+                </field>
+                <field id="browsing_redirect_page_url" translate="label,tooltip" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect Visitor to This Page</label>
+                    <validate>validate-url</validate>
+                    <tooltip>Insert the page URL to redirect customers to any page you need.</tooltip>
+                    <depends>
+                        <field id="browsing" separator=",">hide_from_specified_customer_groups,hide_from_everyone</field>
+                    </depends>
+                </field>
+                <field id="product_price_displaying" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Product Price</label>
+                    <source_model>Aheadworks\CustGroupCatPermissions\Model\Source\Config\AccessMode</source_model>
+                    <depends>
+                        <field id="browsing" separator=",">hide_from_specified_customer_groups,show_for_everyone</field>
+                    </depends>
+                </field>
+                <field id="product_price_displaying_customer_groups" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer groups</label>
+                    <validate>required-entry</validate>
+                    <source_model>Aheadworks\CustGroupCatPermissions\Model\Source\Customer\Groups</source_model>
+                    <depends>
+                        <field id="product_price_displaying">hide_from_specified_customer_groups</field>
+                        <field id="browsing" separator=",">hide_from_specified_customer_groups,show_for_everyone</field>
+                    </depends>
+                </field>
+                <field id="product_price_displaying_message_for_hidden_price" translate="label,tooltip" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Message When Price is Hidden</label>
+                    <tooltip>T‌his message is shown for customers when the price is hidden. HTML Tags are allowed.</tooltip>
+                    <depends>
+                        <field id="product_price_displaying" separator=",">hide_from_specified_customer_groups,hide_from_everyone</field>
+                        <field id="browsing" separator=",">hide_from_specified_customer_groups,show_for_everyone</field>
+                    </depends>
+                </field>
+                <field id="product_add_to_cart_button_displaying" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Adding to Cart</label>
+                    <source_model>Aheadworks\CustGroupCatPermissions\Model\Source\Config\AccessMode</source_model>
+                    <depends>
+                        <field id="browsing" separator=",">hide_from_specified_customer_groups,show_for_everyone</field>
+                        <field id="product_price_displaying" separator=",">show_for_everyone,hide_from_specified_customer_groups</field>
+                    </depends>
+                </field>
+                <field id="product_add_to_cart_button_displaying_customer_groups" translate="label" type="multiselect" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer groups</label>
+                    <validate>required-entry</validate>
+                    <source_model>Aheadworks\CustGroupCatPermissions\Model\Source\Customer\Groups</source_model>
+                    <depends>
+                        <field id="product_add_to_cart_button_displaying">hide_from_specified_customer_groups</field>
+                        <field id="product_price_displaying" separator=",">show_for_everyone,hide_from_specified_customer_groups</field>
+                        <field id="browsing" separator=",">hide_from_specified_customer_groups,show_for_everyone</field>
+                    </depends>
+                </field>
+                <field id="product_add_to_cart_button_displaying_message_for_hidden_button" translate="label,tooltip" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Message When Button Add to Cart Is Hidden</label>
+                    <tooltip>T‌his message is shown for customers when button Add to Cart is hidden. HTML Tags are allowed.</tooltip>
+                    <depends>
+                        <field id="product_add_to_cart_button_displaying" separator=",">hide_from_specified_customer_groups,hide_from_everyone</field>
+                        <field id="product_price_displaying" separator=",">show_for_everyone,hide_from_specified_customer_groups</field>
+                        <field id="browsing" separator=",">hide_from_specified_customer_groups,show_for_everyone</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="cms_page_permissions" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Static Page Permissions</label>
+                <field id="cms_page_browsing" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Static Pages</label>
+                    <source_model>Aheadworks\CustGroupCatPermissions\Model\Source\Config\AccessMode</source_model>
+                </field>
+                <field id="cms_page_browsing_customer_groups" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer groups</label>
+                    <validate>required-entry</validate>
+                    <source_model>Aheadworks\CustGroupCatPermissions\Model\Source\Customer\Groups</source_model>
+                    <depends>
+                        <field id="cms_page_browsing">hide_from_specified_customer_groups</field>
+                    </depends>
+                </field>
+                <field id="cms_page_browsing_redirect_page_url" translate="label,tooltip" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect Visitor to This Page</label>
+                    <validate>validate-url</validate>
+                    <tooltip>Insert the page URL to redirect customers to any page you need.</tooltip>
+                    <depends>
+                        <field id="cms_page_browsing" separator=",">hide_from_specified_customer_groups,hide_from_everyone</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
